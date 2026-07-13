@@ -1,0 +1,713 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f7f7f8;
+  color: #1a1a1a;
+}
+
+/* ---------- Auth pages (Day 9) ---------- */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 380px;
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form h1 {
+  font-size: 20px;
+  margin: 0 0 24px 0;
+}
+
+.auth-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 14px 0 6px 0;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d0d0d5;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.auth-form button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 11px;
+  background: #4a5fd1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 18px;
+  color: #666;
+}
+
+.field-error {
+  color: #b3261e;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}
+
+.hint {
+  font-size: 12px;
+  color: #888;
+  margin: 4px 0 0 0;
+}
+
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #888;
+}
+
+/* ---------- Shared page layout (Day 10+) ---------- */
+
+.page {
+  min-height: 100vh;
+}
+
+.page-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+section {
+  margin-top: 28px;
+}
+
+section h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #4a5fd1;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: white;
+  color: #333;
+  border: 1px solid #d0d0d5;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.error-banner {
+  background: #fdecea;
+  color: #b3261e;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+.status-banner {
+  background: #e8f5e9;
+  color: #1b5e20;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+.empty-hint {
+  color: #888;
+  font-size: 13px;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: white;
+  border-bottom: 1px solid #e5e5e8;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: #444;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navbar-links a:hover {
+  color: #4a5fd1;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #666;
+}
+
+.navbar-user button {
+  background: white;
+  color: #333;
+  border: 1px solid #d0d0d5;
+  padding: 6px 12px;
+}
+
+/* ---------- Dashboard cards ---------- */
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card h3 {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+}
+
+.dashboard-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* ---------- Search bar ---------- */
+
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid #d0d0d5;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* ---------- Skill list rows ---------- */
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skill-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.skill-category,
+.proficiency-tag,
+.person-bio {
+  font-size: 12px;
+  color: #888;
+}
+
+.skill-add-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.skill-add-form select {
+  padding: 6px 8px;
+  border: 1px solid #d0d0d5;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* ---------- Modal ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.modal-box {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.modal-box h2 {
+  font-size: 17px;
+  margin: 0 0 12px 0;
+}
+
+.modal-box label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 12px 0 6px 0;
+}
+
+.modal-box select,
+.modal-box textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d0d0d5;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* ---------- Tabs ---------- */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 16px 0;
+  border-bottom: 1px solid #e5e5e8;
+}
+
+.tab {
+  background: none;
+  color: #666;
+  padding: 10px 16px;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  color: #4a5fd1;
+  border-bottom: 2px solid #4a5fd1;
+}
+
+/* ---------- Swap request cards ---------- */
+
+.swap-request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.swap-request-card {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.swap-request-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.swap-request-person {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.swap-request-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #8a6100;
+}
+
+.status-accepted {
+  background: #d6e4ff;
+  color: #1a3d8f;
+}
+
+.status-completed {
+  background: #d4edda;
+  color: #1b5e20;
+}
+
+.status-declined,
+.status-cancelled {
+  background: #f1f1f3;
+  color: #666;
+}
+
+/* ---------- Order form (Day 11) ---------- */
+
+.order-form {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 480px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.order-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 14px 0 6px 0;
+}
+
+.order-form input,
+.order-form select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #d0d0d5;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.order-form button[type='submit'] {
+  width: 100%;
+  margin-top: 22px;
+  padding: 11px;
+}
+
+button.small {
+  padding: 5px 10px;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* ---------- Order cards ---------- */
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.order-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.order-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.order-id {
+  font-size: 12px;
+  color: #888;
+}
+
+.order-details {
+  font-size: 13px;
+  color: #444;
+  margin: 10px 0 4px 0;
+}
+
+.order-price {
+  font-weight: 700;
+  font-size: 15px;
+  margin: 4px 0;
+}
+
+.order-supplier {
+  font-size: 12px;
+  color: #666;
+}
+
+.order-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.payment-status {
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
+}
+
+/* ---------- Progress tracker ---------- */
+
+.order-progress {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 10px 0;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.progress-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 55%;
+  width: 90%;
+  height: 2px;
+  background: #e0e0e5;
+}
+
+.progress-step.done:not(:last-child)::after {
+  background: #4a5fd1;
+}
+
+.progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e0e0e5;
+  z-index: 1;
+}
+
+.progress-step.done .progress-dot {
+  background: #4a5fd1;
+}
+
+.progress-label {
+  font-size: 10px;
+  color: #999;
+  margin-top: 6px;
+  text-align: center;
+}
+
+.progress-step.done .progress-label {
+  color: #4a5fd1;
+  font-weight: 600;
+}
+
+/* ---------- Error boundary & 404 (Day 13) ---------- */
+
+.error-boundary-page,
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+
+.not-found-page h1 {
+  font-size: 64px;
+  margin: 0;
+  color: #d0d0d5;
+}
+
+.error-boundary-page h1 {
+  font-size: 22px;
+}
+
+.error-boundary-page p,
+.not-found-page p {
+  color: #666;
+  max-width: 340px;
+  margin: 10px 0 20px 0;
+}
+
+/* ---------- Matches page ---------- */
+
+.page-subtitle {
+  color: #666;
+  font-size: 13.5px;
+  margin: -8px 0 20px 0;
+  max-width: 560px;
+}
+
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.match-card {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.match-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.match-name {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.match-score {
+  font-size: 12px;
+  color: #888;
+  margin-left: auto;
+}
+
+.badge-mutual {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #d4edda;
+  color: #1b5e20;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.match-line {
+  font-size: 13px;
+  margin: 4px 0;
+  color: #444;
+}
+
+.match-card button {
+  margin-top: 10px;
+}
+
+/* ---------- Contact info (shown once a swap is accepted) ---------- */
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #f4f5f9;
+  padding: 10px 12px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.contact-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 0.4px;
+}
+
+.contact-link {
+  font-size: 13.5px;
+  color: #4a5fd1;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
