@@ -1,0 +1,113 @@
+/* ============================================================
+   Custom animations — used sparingly and deliberately.
+   Bootstrap already handles modal fades and spinners natively;
+   these fill the remaining gaps: page entrance, card hover,
+   and a "waiting for something" pulse on pending status badges.
+   ============================================================ */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-content {
+  animation: fade-in-up 0.35s ease-out;
+}
+
+/* Staggered entrance for list items — each row appears slightly after
+   the one before it, instead of all popping in at once. Capped at 8
+   items so a long list doesn't leave the last rows waiting a full
+   second to appear. */
+.skill-row,
+.order-card,
+.swap-request-card,
+.match-card {
+  animation: fade-in-up 0.3s ease-out backwards;
+}
+.skill-row:nth-child(1), .order-card:nth-child(1), .swap-request-card:nth-child(1), .match-card:nth-child(1) { animation-delay: 0.02s; }
+.skill-row:nth-child(2), .order-card:nth-child(2), .swap-request-card:nth-child(2), .match-card:nth-child(2) { animation-delay: 0.06s; }
+.skill-row:nth-child(3), .order-card:nth-child(3), .swap-request-card:nth-child(3), .match-card:nth-child(3) { animation-delay: 0.10s; }
+.skill-row:nth-child(4), .order-card:nth-child(4), .swap-request-card:nth-child(4), .match-card:nth-child(4) { animation-delay: 0.14s; }
+.skill-row:nth-child(n+5), .order-card:nth-child(n+5), .swap-request-card:nth-child(n+5), .match-card:nth-child(n+5) { animation-delay: 0.18s; }
+
+/* Card hover lift — small, physical-feeling response to hovering
+   anything clickable, rather than a static flat surface. */
+.dashboard-card,
+.skill-row,
+.order-card,
+.swap-request-card,
+.match-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.dashboard-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Pulse on "pending"/"placed" badges specifically — a subtle signal
+   that something is awaiting action, without being distracting on
+   badges representing a finished state (completed/delivered/paid). */
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.status-pending,
+.status-placed {
+  animation: soft-pulse 2s ease-in-out infinite;
+}
+
+/* Respect reduced-motion preference — accessibility floor, not optional */
+@media (prefers-reduced-motion: reduce) {
+  .page-content,
+  .skill-row,
+  .order-card,
+  .swap-request-card,
+  .match-card,
+  .status-pending,
+  .status-placed {
+    animation: none;
+  }
+  .dashboard-card:hover {
+    transform: none;
+  }
+}
+
+/* Mobile nav dropdown — slides down + fades in, rather than snapping open */
+@keyframes slide-down-fade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.navbar-links-mobile {
+  animation: slide-down-fade 0.2s ease-out;
+}
+
+/* Modal entrance — subtle scale + fade, like Bootstrap's native modal
+   animation, applied to our own modal markup */
+@keyframes modal-pop-in {
+  from { opacity: 0; transform: scale(0.96) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes overlay-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal-overlay {
+  animation: overlay-fade-in 0.15s ease-out;
+}
+.modal-box {
+  animation: modal-pop-in 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-links-mobile,
+  .modal-overlay,
+  .modal-box {
+    animation: none;
+  }
+}

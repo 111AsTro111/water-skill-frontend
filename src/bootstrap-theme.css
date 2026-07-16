@@ -1,0 +1,73 @@
+/* ============================================================
+   Bootstrap 5.3 theme override.
+   Bootstrap 5.3+ exposes its whole color system as CSS variables
+   (--bs-primary, --bs-body-bg, etc.) — overriding them here means
+   every Bootstrap component (buttons, badges, navbar, modals,
+   forms) automatically picks up OUR teal/amber identity instead
+   of default Bootstrap blue, with zero per-component overrides.
+   ============================================================ */
+
+:root,
+[data-bs-theme='light'] {
+  --bs-primary: #0e7c7b;
+  --bs-primary-rgb: 14, 124, 123;
+  --bs-secondary: #5c7570;
+  --bs-success: #1b8a5a;
+  --bs-warning: #a9760f;
+  --bs-danger: #c4432e;
+  --bs-info: #2bb6b3;
+
+  --bs-body-bg: #f7faf9;
+  --bs-body-color: #10231f;
+  --bs-border-color: #dce5e3;
+  --bs-secondary-bg: #eef4f3;
+  --bs-tertiary-bg: #eef4f3;
+
+  --bs-link-color: #0e7c7b;
+  --bs-link-hover-color: #0b6564;
+
+  --bs-border-radius: 10px;
+  --bs-border-radius-sm: 6px;
+  --bs-border-radius-lg: 14px;
+
+  /* Accent isn't a native Bootstrap slot — we reuse this custom
+     variable in our own CSS wherever the amber accent (not teal
+     primary) is called for, like the navbar's signature bar. */
+  --accent: #d9a441;
+  --accent-soft: #fbf0dc;
+}
+
+[data-bs-theme='dark'] {
+  --bs-primary: #2bb6b3;
+  --bs-primary-rgb: 43, 182, 179;
+  --bs-secondary: #93aca6;
+  --bs-success: #3fc98a;
+  --bs-warning: #e0b04a;
+  --bs-danger: #ef7a63;
+  --bs-info: #2bb6b3;
+
+  --bs-body-bg: #0b1615;
+  --bs-body-color: #e6efec;
+  --bs-border-color: #1f3733;
+  --bs-secondary-bg: #172b28;
+  --bs-tertiary-bg: #172b28;
+
+  --bs-link-color: #2bb6b3;
+  --bs-link-hover-color: #3fc9c6;
+
+  --accent: #e8b963;
+  --accent-soft: #2a2113;
+}
+
+body {
+  font-family: 'Inter', var(--bs-body-font-family);
+}
+
+h1, h2, h3, .navbar-brand {
+  font-family: 'Space Grotesk', var(--bs-body-font-family);
+  font-weight: 600;
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}

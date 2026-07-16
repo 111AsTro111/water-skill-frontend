@@ -592,20 +592,182 @@ button.small {
   font-weight: 600;
 }
 
-/* ---------- Slow payment confirmation state ---------- */
+/* ---------- Error boundary & 404 (Day 13) ---------- */
 
-.payment-status-slow {
+.error-boundary-page,
+.not-found-page {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: #fff8e1;
-  padding: 10px 12px;
-  border-radius: 8px;
-  max-width: 320px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
 }
 
-.payment-status-slow .payment-status {
-  color: #7a5a2c;
-  font-size: 12.5px;
-  line-height: 1.4;
+.not-found-page h1 {
+  font-size: 64px;
+  margin: 0;
+  color: #d0d0d5;
+}
+
+.error-boundary-page h1 {
+  font-size: 22px;
+}
+
+.error-boundary-page p,
+.not-found-page p {
+  color: #666;
+  max-width: 340px;
+  margin: 10px 0 20px 0;
+}
+
+/* ---------- Matches page ---------- */
+
+.page-subtitle {
+  color: #666;
+  font-size: 13.5px;
+  margin: -8px 0 20px 0;
+  max-width: 560px;
+}
+
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.match-card {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.match-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.match-name {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.match-score {
+  font-size: 12px;
+  color: #888;
+  margin-left: auto;
+}
+
+.badge-mutual {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #d4edda;
+  color: #1b5e20;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.match-line {
+  font-size: 13px;
+  margin: 4px 0;
+  color: #444;
+}
+
+.match-card button {
+  margin-top: 10px;
+}
+
+/* ---------- Contact info (shown once a swap is accepted) ---------- */
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #f4f5f9;
+  padding: 10px 12px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.contact-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 0.4px;
+}
+
+.contact-link {
+  font-size: 13.5px;
+  color: #4a5fd1;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   AVATAR
+   ============================================================ */
+
+.avatar-image {
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.avatar-initials {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: var(--font-display);
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.avatar-upload-preview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.avatar-image-large {
+  width: 80px;
+  height: 80px;
+}
+
+.avatar-upload-label {
+  display: inline-block;
+  background: var(--color-surface-2);
+  border: 1px dashed var(--color-border);
+  color: var(--color-text);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.avatar-upload-label:hover {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+.avatar-upload-input {
+  display: none;
 }

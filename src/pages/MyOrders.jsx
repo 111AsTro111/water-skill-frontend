@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { waterOrdersApi } from '../api/water';
 import Navbar from '../components/Navbar';
 import PayButton from '../components/PayButton';
+import Spinner from '../components/Spinner';
 
 const STATUS_LABELS = {
   placed: 'Order placed',
@@ -66,7 +67,7 @@ export default function MyOrders() {
 
         {message && <div className="status-banner">{message}</div>}
         {error && <div className="error-banner">{error}</div>}
-        {loading && <p>Loading...</p>}
+        {loading && <Spinner label="Loading your orders..." />}
         {!loading && orders.length === 0 && (
           <p className="empty-hint">No orders yet — place your first one above.</p>
         )}
@@ -115,9 +116,9 @@ export default function MyOrders() {
                   </button>
                 )}
 
-                {order.payment_method === 'online' && !hasSuccessfulPayment(order) && (
-                  <PayButton order={order} onPaid={load} />
-                )}
+                {order.payment_method === 'online' &&
+                  order.status !== 'cancelled' &&
+                  !hasSuccessfulPayment(order) && <PayButton order={order} onPaid={load} />}
 
                 {order.payment_method === 'online' && hasSuccessfulPayment(order) && (
                   <span className="status-badge status-completed">Paid</span>

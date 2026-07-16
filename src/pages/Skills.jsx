@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { skillsApi } from '../api/skills';
 import Navbar from '../components/Navbar';
+import Spinner from '../components/Spinner';
 
 export default function Skills() {
   const [skills, setSkills] = useState([]);
@@ -77,7 +78,7 @@ export default function Skills() {
 
         {statusMessage && <div className="status-banner">{statusMessage}</div>}
         {error && <div className="error-banner">{error}</div>}
-        {loading && <p>Loading skills...</p>}
+        {loading && <Spinner label="Loading skills..." />}
 
         <div className="skill-list">
           {!loading &&

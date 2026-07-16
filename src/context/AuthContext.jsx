@@ -3,16 +3,10 @@ import apiClient from '../api/client';
 
 const AuthContext = createContext(null);
 
-// Wrapping the whole app in this provider means any component can call
-// useAuth() to know who's logged in, without passing user data down
-// through props at every level ("prop drilling").
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // On first load, check if we already have a saved token (e.g. the user
-  // refreshed the page) and restore their session instead of forcing a
-  // fresh login every time.
   useEffect(() => {
     const savedUser = localStorage.getItem('auth_user');
     const token = localStorage.getItem('auth_token');
@@ -39,11 +33,17 @@ export function AuthProvider({ children }) {
     try {
       await apiClient.post('/logout');
     } finally {
-      // Clear local state even if the API call fails (e.g. no internet) —
-      // the user should always be able to log out of THIS device, even if
-      // we can't reach the server to revoke the token remotely right now.
       clearSession();
     }
+  }
+
+  // Used after any action that changes the user's own data without a full
+  // re-login — right now just the avatar upload/remove, but this is the
+  // right place to plug in future profile edits (name, bio, etc.) too,
+  // rather than adding a new one-off update mechanism each time.
+  function updateUser(updatedUser) {
+    localStorage.setItem('auth_user', JSON.stringify(updatedUser));
+    setUser(updatedUser);
   }
 
   function saveSession(userData, token) {
@@ -59,14 +59,12 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// Custom hook so components just write `const { user, login } = useAuth();`
-// instead of importing useContext and AuthContext separately every time.
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

@@ -3,6 +3,7 @@ import { matchesApi } from '../api/matches';
 import { skillsApi } from '../api/skills';
 import Navbar from '../components/Navbar';
 import SendSwapRequestModal from '../components/SendSwapRequestModal';
+import Spinner from '../components/Spinner';
 
 // This page finally gives the Day 5 Python matching service a real
 // frontend. It was built and deployed all the way back then, but nothing
@@ -70,7 +71,7 @@ export default function Matches() {
 
         {message && <div className="status-banner">{message}</div>}
         {error && <div className="error-banner">{error}</div>}
-        {loading && <p>Loading matches...</p>}
+        {loading && <Spinner label="Loading matches..." />}
 
         {!loading && matches.length === 0 && (
           <p className="empty-hint">
