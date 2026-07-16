@@ -592,122 +592,20 @@ button.small {
   font-weight: 600;
 }
 
-/* ---------- Error boundary & 404 (Day 13) ---------- */
+/* ---------- Slow payment confirmation state ---------- */
 
-.error-boundary-page,
-.not-found-page {
-  min-height: 100vh;
+.payment-status-slow {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-}
-
-.not-found-page h1 {
-  font-size: 64px;
-  margin: 0;
-  color: #d0d0d5;
-}
-
-.error-boundary-page h1 {
-  font-size: 22px;
-}
-
-.error-boundary-page p,
-.not-found-page p {
-  color: #666;
-  max-width: 340px;
-  margin: 10px 0 20px 0;
-}
-
-/* ---------- Matches page ---------- */
-
-.page-subtitle {
-  color: #666;
-  font-size: 13.5px;
-  margin: -8px 0 20px 0;
-  max-width: 560px;
-}
-
-.match-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.match-card {
-  background: white;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-}
-
-.match-card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.match-name {
-  font-weight: 700;
-  font-size: 15px;
-}
-
-.match-score {
-  font-size: 12px;
-  color: #888;
-  margin-left: auto;
-}
-
-.badge-mutual {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  background: #d4edda;
-  color: #1b5e20;
-  padding: 3px 8px;
-  border-radius: 20px;
-}
-
-.match-line {
-  font-size: 13px;
-  margin: 4px 0;
-  color: #444;
-}
-
-.match-card button {
-  margin-top: 10px;
-}
-
-/* ---------- Contact info (shown once a swap is accepted) ---------- */
-
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  background: #f4f5f9;
+  gap: 8px;
+  background: #fff8e1;
   padding: 10px 12px;
   border-radius: 8px;
-  width: 100%;
+  max-width: 320px;
 }
 
-.contact-label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #888;
-  letter-spacing: 0.4px;
-}
-
-.contact-link {
-  font-size: 13.5px;
-  color: #4a5fd1;
-  text-decoration: none;
-}
-
-.contact-link:hover {
-  text-decoration: underline;
+.payment-status-slow .payment-status {
+  color: #7a5a2c;
+  font-size: 12.5px;
+  line-height: 1.4;
 }
