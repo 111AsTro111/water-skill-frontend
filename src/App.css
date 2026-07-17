@@ -1,3 +1,62 @@
+/* ============================================================
+   THEME VARIABLES & RESET
+   ============================================================ */
+:root {
+  /* Global Brand Colors */
+  --color-primary: #4a5fd1;
+  --color-primary-soft: #eef0ff;
+  --radius-sm: 8px;
+  --font-display: system-ui, -apple-system, sans-serif;
+
+  /* Light Theme Colors (Default Bootstrap Override) */
+  --color-text: #1a1a1a;
+  --color-border: #d0d0d5;
+  --color-surface-2: #f4f5f9;
+  --bg-page: #f7f7f8;
+  --bg-card: #ffffff;
+  --bg-navbar: #ffffff;
+}
+
+/* ---------- Dark Mode Overrides ---------- */
+/* High specificity selectors to instantly force Bootstrap's engine dark */
+html.dark-mode,
+html[data-theme='dark'],
+html[data-bs-theme='dark'],
+body[data-bs-theme='dark'] {
+  --color-text: #f7f7f8 !important;
+  --color-border: #3a3a3c !important;
+  --color-surface-2: #2c2c2e !important;
+  --bg-page: #121214 !important;
+  --bg-card: #1c1c1e !important;
+  --bg-navbar: #1c1c1e !important;
+  --color-primary-soft: #1a233a !important;
+  
+  background-color: var(--bg-page) !important;
+  color: var(--color-text) !important;
+}
+
+/* Force dark backgrounds on all core UI components when theme is active */
+html[data-bs-theme='dark'] body,
+html.dark-mode body,
+[data-bs-theme='dark'] .navbar,
+.dark-mode .navbar,
+[data-bs-theme='dark'] .dashboard-card,
+.dark-mode .dashboard-card,
+[data-bs-theme='dark'] .skill-row,
+.dark-mode .skill-row,
+[data-bs-theme='dark'] .swap-request-card,
+.dark-mode .swap-request-card,
+[data-bs-theme='dark'] .order-form,
+.dark-mode .order-form,
+[data-bs-theme='dark'] .order-card,
+.dark-mode .order-card,
+[data-bs-theme='dark'] .modal-box,
+.dark-mode .modal-box {
+  background-color: var(--bg-card) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,12 +64,87 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background: #f7f7f8;
-  color: #1a1a1a;
+  background-color: var(--bg-page);
+  color: var(--color-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* ---------- Auth pages (Day 9) ---------- */
+/* ============================================================
+   SHARED PAGE LAYOUT & TYPOGRAPHY
+   ============================================================ */
+.page {
+  min-height: 100vh;
+}
 
+.page-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+section {
+  margin-top: 28px;
+}
+
+section h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.error-banner {
+  background: #fdecea;
+  color: #b3261e;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+.status-banner {
+  background: #e8f5e9;
+  color: #1b5e20;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+.empty-hint {
+  color: #888;
+  font-size: 13px;
+}
+
+/* ============================================================
+   AUTH PAGES
+   ============================================================ */
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -22,10 +156,11 @@ body {
 .auth-form {
   width: 100%;
   max-width: 380px;
-  background: white;
+  background: var(--bg-card);
   padding: 32px;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.25s ease;
 }
 
 .auth-form h1 {
@@ -43,7 +178,9 @@ body {
 .auth-form input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #d0d0d5;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
   border-radius: 8px;
   font-size: 14px;
 }
@@ -52,7 +189,7 @@ body {
   width: 100%;
   margin-top: 22px;
   padding: 11px;
-  background: #4a5fd1;
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -89,126 +226,143 @@ body {
   color: #888;
 }
 
-/* ---------- Shared page layout (Day 10+) ---------- */
-
-.page {
-  min-height: 100vh;
-}
-
-.page-content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 24px;
-}
-
-.page-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-section {
-  margin-top: 28px;
-}
-
-section h2 {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 8px;
-  background: #4a5fd1;
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-button.secondary {
-  background: white;
-  color: #333;
-  border: 1px solid #d0d0d5;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-
-.error-banner {
-  background: #fdecea;
-  color: #b3261e;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 12px 0;
-}
-
-.status-banner {
-  background: #e8f5e9;
-  color: #1b5e20;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 12px 0;
-}
-
-.empty-hint {
-  color: #888;
-  font-size: 13px;
-}
-
-/* ---------- Navbar ---------- */
-
+/* ============================================================
+   CLEAN RESPONSIVE NAVBAR
+   ============================================================ */
 .navbar {
+  background: var(--bg-navbar);
+  border-bottom: 1px solid var(--color-border);
+  padding: 12px 24px;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.navbar-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
-  background: white;
-  border-bottom: 1px solid #e5e5e8;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .navbar-brand {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 .navbar-links {
   display: flex;
-  gap: 20px;
+  gap: 18px;
 }
 
 .navbar-links a {
-  color: #444;
+  color: var(--color-text);
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .navbar-links a:hover {
-  color: #4a5fd1;
+  color: var(--color-primary);
 }
 
 .navbar-user {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.navbar-username {
   font-size: 13px;
-  color: #666;
+  font-weight: 500;
+  color: var(--color-text);
 }
 
-.navbar-user button {
-  background: white;
-  color: #333;
-  border: 1px solid #d0d0d5;
+.navbar-logout {
+  background: transparent;
+  color: #e03131;
+  border: 1px solid #ffc9c9;
   padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* ---------- Dashboard cards ---------- */
+.navbar-logout:hover {
+  background: #fff5f5;
+  border-color: #fa5252;
+}
 
+.navbar-hamburger {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--color-text);
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  transition: background-color 0.2s;
+}
+
+.navbar-hamburger:hover {
+  background: var(--color-surface-2);
+}
+
+.navbar-links-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+  margin-top: 10px;
+}
+
+.navbar-links-mobile a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+/* ============================================================
+   THEME TOGGLE BUTTON
+   ============================================================ */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--color-surface-2);
+}
+
+.theme-toggle svg {
+  color: var(--color-text);
+}
+
+/* ============================================================
+   DASHBOARD CARDS
+   ============================================================ */
 .dashboard-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -217,12 +371,13 @@ button:disabled {
 }
 
 .dashboard-card {
-  background: white;
+  background: var(--bg-card);
   padding: 20px;
   border-radius: 12px;
   text-decoration: none;
   color: inherit;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s ease;
 }
 
 .dashboard-card h3 {
@@ -236,8 +391,9 @@ button:disabled {
   color: #666;
 }
 
-/* ---------- Search bar ---------- */
-
+/* ============================================================
+   SEARCH BAR & INPUTS
+   ============================================================ */
 .search-bar {
   display: flex;
   gap: 8px;
@@ -247,13 +403,16 @@ button:disabled {
 .search-bar input {
   flex: 1;
   padding: 9px 12px;
-  border: 1px solid #d0d0d5;
+  border: 1px solid var(--color-border);
+  background: var(--bg-card);
+  color: var(--color-text);
   border-radius: 8px;
   font-size: 14px;
 }
 
-/* ---------- Skill list rows ---------- */
-
+/* ============================================================
+   SKILL LIST ROWS
+   ============================================================ */
 .skill-list {
   display: flex;
   flex-direction: column;
@@ -264,12 +423,13 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: white;
+  background: var(--bg-card);
   padding: 12px 16px;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   flex-wrap: wrap;
   gap: 8px;
+  transition: background-color 0.25s ease;
 }
 
 .skill-row-main {
@@ -281,7 +441,7 @@ button:disabled {
 .skill-name {
   font-weight: 600;
   font-size: 14px;
-  color: #1a1a1a;
+  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -301,13 +461,16 @@ button:disabled {
 
 .skill-add-form select {
   padding: 6px 8px;
-  border: 1px solid #d0d0d5;
+  border: 1px solid var(--color-border);
+  background: var(--bg-card);
+  color: var(--color-text);
   border-radius: 6px;
   font-size: 13px;
 }
 
-/* ---------- Modal ---------- */
-
+/* ============================================================
+   MODALS & DIALOGS
+   ============================================================ */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -320,11 +483,13 @@ button:disabled {
 }
 
 .modal-box {
-  background: white;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 24px;
   width: 100%;
   max-width: 420px;
+  color: var(--color-text);
+  transition: background-color 0.25s ease;
 }
 
 .modal-box h2 {
@@ -343,7 +508,9 @@ button:disabled {
 .modal-box textarea {
   width: 100%;
   padding: 8px 10px;
-  border: 1px solid #d0d0d5;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
   border-radius: 8px;
   font-size: 13px;
   font-family: inherit;
@@ -356,13 +523,14 @@ button:disabled {
   margin-top: 20px;
 }
 
-/* ---------- Tabs ---------- */
-
+/* ============================================================
+   TABS
+   ============================================================ */
 .tabs {
   display: flex;
   gap: 4px;
   margin: 16px 0;
-  border-bottom: 1px solid #e5e5e8;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .tab {
@@ -374,12 +542,13 @@ button:disabled {
 }
 
 .tab.active {
-  color: #4a5fd1;
-  border-bottom: 2px solid #4a5fd1;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
 }
 
-/* ---------- Swap request cards ---------- */
-
+/* ============================================================
+   SWAP REQUESTS
+   ============================================================ */
 .swap-request-list {
   display: flex;
   flex-direction: column;
@@ -387,10 +556,11 @@ button:disabled {
 }
 
 .swap-request-card {
-  background: white;
+  background: var(--bg-card);
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.25s ease;
 }
 
 .swap-request-header {
@@ -440,14 +610,16 @@ button:disabled {
   color: #666;
 }
 
-/* ---------- Order form (Day 11) ---------- */
-
+/* ============================================================
+   ORDER FORM & CARDS
+   ============================================================ */
 .order-form {
-  background: white;
+  background: var(--bg-card);
   padding: 24px;
   border-radius: 12px;
   max-width: 480px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s ease;
 }
 
 .order-form label {
@@ -461,7 +633,9 @@ button:disabled {
 .order-form select {
   width: 100%;
   padding: 9px 12px;
-  border: 1px solid #d0d0d5;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
@@ -479,8 +653,6 @@ button.small {
   margin-top: 8px;
 }
 
-/* ---------- Order cards ---------- */
-
 .order-list {
   display: flex;
   flex-direction: column;
@@ -489,10 +661,11 @@ button.small {
 }
 
 .order-card {
-  background: white;
+  background: var(--bg-card);
   padding: 18px;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s ease;
 }
 
 .order-card-header {
@@ -509,7 +682,7 @@ button.small {
 
 .order-details {
   font-size: 13px;
-  color: #444;
+  color: var(--color-text);
   margin: 10px 0 4px 0;
 }
 
@@ -537,8 +710,9 @@ button.small {
   font-style: italic;
 }
 
-/* ---------- Progress tracker ---------- */
-
+/* ============================================================
+   PROGRESS TRACKER
+   ============================================================ */
 .order-progress {
   display: flex;
   align-items: center;
@@ -565,7 +739,7 @@ button.small {
 }
 
 .progress-step.done:not(:last-child)::after {
-  background: #4a5fd1;
+  background: var(--color-primary);
 }
 
 .progress-dot {
@@ -577,7 +751,7 @@ button.small {
 }
 
 .progress-step.done .progress-dot {
-  background: #4a5fd1;
+  background: var(--color-primary);
 }
 
 .progress-label {
@@ -588,12 +762,13 @@ button.small {
 }
 
 .progress-step.done .progress-label {
-  color: #4a5fd1;
+  color: var(--color-primary);
   font-weight: 600;
 }
 
-/* ---------- Error boundary & 404 (Day 13) ---------- */
-
+/* ============================================================
+   ERRORS & NOT FOUND (404)
+   ============================================================ */
 .error-boundary-page,
 .not-found-page {
   min-height: 100vh;
@@ -608,7 +783,7 @@ button.small {
 .not-found-page h1 {
   font-size: 64px;
   margin: 0;
-  color: #d0d0d5;
+  color: var(--color-border);
 }
 
 .error-boundary-page h1 {
@@ -622,8 +797,9 @@ button.small {
   margin: 10px 0 20px 0;
 }
 
-/* ---------- Matches page ---------- */
-
+/* ============================================================
+   MATCHES
+   ============================================================ */
 .page-subtitle {
   color: #666;
   font-size: 13.5px;
@@ -638,10 +814,11 @@ button.small {
 }
 
 .match-card {
-  background: white;
+  background: var(--bg-card);
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.25s ease;
 }
 
 .match-card-header {
@@ -675,20 +852,21 @@ button.small {
 .match-line {
   font-size: 13px;
   margin: 4px 0;
-  color: #444;
+  color: var(--color-text);
 }
 
 .match-card button {
   margin-top: 10px;
 }
 
-/* ---------- Contact info (shown once a swap is accepted) ---------- */
-
+/* ============================================================
+   CONTACT CARD
+   ============================================================ */
 .contact-info {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  background: #f4f5f9;
+  background: var(--color-surface-2);
   padding: 10px 12px;
   border-radius: 8px;
   width: 100%;
@@ -704,7 +882,7 @@ button.small {
 
 .contact-link {
   font-size: 13.5px;
-  color: #4a5fd1;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -713,9 +891,8 @@ button.small {
 }
 
 /* ============================================================
-   AVATAR
+   AVATAR STYLE RULES
    ============================================================ */
-
 .avatar-image {
   border-radius: 50%;
   object-fit: cover;
@@ -735,6 +912,7 @@ button.small {
   cursor: pointer;
   flex-shrink: 0;
   user-select: none;
+  background-color: var(--color-primary);
 }
 
 .avatar-upload-preview {
@@ -770,4 +948,21 @@ button.small {
 
 .avatar-upload-input {
   display: none;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ============================================================ */
+@media (max-width: 991px) {
+  .navbar-links-desktop {
+    display: none !important;
+  }
+  
+  .navbar-hamburger {
+    display: flex;
+  }
+
+  .navbar-links-mobile {
+    display: flex;
+  }
 }

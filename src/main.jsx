@@ -1,19 +1,16 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext'; // Added this back for login sessions
+import './App.css'; // Or any of your existing CSS imports
 
-// Order matters: Bootstrap's base CSS loads first, then our theme
-// override (which redefines Bootstrap's own variables), then our
-// remaining custom component styles, then animations last so they
-// can safely apply on top of everything else.
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './bootstrap-theme.css';
-import './App.css';
-import './animations.css';
-
-import App from './App.jsx';
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <ThemeProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ThemeProvider>
+  </React.StrictMode>
 );

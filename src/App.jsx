@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext'; // Added this
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorBoundary from './components/ErrorBoundary';
 import Login from './pages/Login';
@@ -26,28 +27,30 @@ export default function App() {
     // this catches it instead of the entire tab going blank.
     <ErrorBoundary>
       <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+        <ThemeProvider> {/* Now all routes have access to theme state */}
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-            <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
-            <Route path="/skills" element={<Protected><Skills /></Protected>} />
-            <Route path="/matches" element={<Protected><Matches /></Protected>} />
-            <Route path="/skills/:skillId" element={<Protected><SkillDetail /></Protected>} />
-            <Route path="/my-skills" element={<Protected><MySkills /></Protected>} />
-            <Route path="/swap-requests" element={<Protected><SwapRequests /></Protected>} />
-            <Route path="/order-water" element={<Protected><PlaceOrder /></Protected>} />
-            <Route path="/my-orders" element={<Protected><MyOrders /></Protected>} />
+              <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
+              <Route path="/skills" element={<Protected><Skills /></Protected>} />
+              <Route path="/matches" element={<Protected><Matches /></Protected>} />
+              <Route path="/skills/:skillId" element={<Protected><SkillDetail /></Protected>} />
+              <Route path="/my-skills" element={<Protected><MySkills /></Protected>} />
+              <Route path="/swap-requests" element={<Protected><SwapRequests /></Protected>} />
+              <Route path="/order-water" element={<Protected><PlaceOrder /></Protected>} />
+              <Route path="/my-orders" element={<Protected><MyOrders /></Protected>} />
 
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-            {/* Catch-all — must stay LAST. Any URL that didn't match a
-                route above (typo, old bookmark, etc.) lands here instead
-                of a blank React Router error page. */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+              {/* Catch-all — must stay LAST. Any URL that didn't match a
+                  route above (typo, old bookmark, etc.) lands here instead
+                  of a blank React Router error page. */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
       </AuthProvider>
     </ErrorBoundary>
   );
