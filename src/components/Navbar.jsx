@@ -31,9 +31,6 @@ export default function Navbar() {
     navigate('/login');
   }
 
-  // Which set of links to show is driven entirely by the current URL, not
-  // stored state — so a direct link to /water/... always shows Water links
-  // even if the person's last remembered section was SkillMesh.
   const inWaterSection = location.pathname.startsWith('/water');
   const links = inWaterSection ? WATER_LINKS : SKILLMESH_LINKS;
   const brandLabel = inWaterSection ? 'Water Delivery' : 'SkillMesh';
@@ -58,10 +55,14 @@ export default function Navbar() {
           )}
         </button>
 
-        {/* Logo now always returns to the chooser — not the section
-            dashboard — so switching sections is always one click away. */}
         <Link to="/choose" className="navbar-brand">
           {brandLabel}
+        </Link>
+
+        {/* Explicit, unmissable button back to the section chooser —
+            not relying on someone realizing the logo itself is clickable. */}
+        <Link to="/choose" className="btn btn-sm navbar-switch-section">
+          &larr; Switch
         </Link>
 
         <div className="navbar-links navbar-links-desktop">
@@ -84,6 +85,9 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="navbar-links-mobile">
+          <Link to="/choose" className="nav-link" onClick={() => setMenuOpen(false)}>
+            &larr; Switch section
+          </Link>
           {links.map((link) => (
             <Link key={link.to} to={link.to} className="nav-link" onClick={() => setMenuOpen(false)}>
               {link.label}
