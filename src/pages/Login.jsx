@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { SECTION_STORAGE_KEY } from './ChooseSection';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -17,13 +18,20 @@ export default function Login() {
 
     try {
       await login(email, password);
-      navigate('/dashboard');
+
+      // /dashboard no longer exists as a route now that the app is split
+      // into SkillMesh / Water sections. Send returning users straight to
+      // their last section; first-time or cleared-storage users land on
+      // the chooser instead.
+      const remembered = localStorage.getItem(SECTION_STORAGE_KEY);
+      if (remembered === 'skillmesh') {
+        navigate('/skillmesh/dashboard');
+      } else if (remembered === 'water') {
+        navigate('/water/dashboard');
+      } else {
+        navigate('/choose');
+      }
     } catch (err) {
-      // Laravel's validation errors come back as err.response.data.errors,
-      // and login-specific errors (wrong password) as err.response.data.message.
-      // Falling back to a generic message means the user never sees a raw
-      // "undefined" or a stack trace, even if the backend response shape
-      // is unexpected — important for a production app, not just a demo.
       const message =
         err.response?.data?.message ||
         err.response?.data?.errors?.email?.[0] ||

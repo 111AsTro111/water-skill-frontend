@@ -1,13 +1,28 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
 import Avatar from './Avatar';
 import AvatarUploadModal from './AvatarUploadModal';
 
+const SKILLMESH_LINKS = [
+  { to: '/skillmesh/dashboard', label: 'Dashboard' },
+  { to: '/skillmesh/skills', label: 'Browse Skills' },
+  { to: '/skillmesh/matches', label: 'Suggested Matches' },
+  { to: '/skillmesh/my-skills', label: 'My Skills' },
+  { to: '/skillmesh/swap-requests', label: 'Swap Requests' },
+];
+
+const WATER_LINKS = [
+  { to: '/water/dashboard', label: 'Dashboard' },
+  { to: '/water/order-water', label: 'Order Water' },
+  { to: '/water/my-orders', label: 'My Orders' },
+];
+
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
@@ -16,20 +31,16 @@ export default function Navbar() {
     navigate('/login');
   }
 
-  const links = [
-    { to: '/dashboard', label: 'Dashboard' },
-    { to: '/skills', label: 'Browse Skills' },
-    { to: '/matches', label: 'Suggested Matches' },
-    { to: '/my-skills', label: 'My Skills' },
-    { to: '/swap-requests', label: 'Swap Requests' },
-    { to: '/order-water', label: 'Order Water' },
-    { to: '/my-orders', label: 'My Orders' },
-  ];
+  // Which set of links to show is driven entirely by the current URL, not
+  // stored state — so a direct link to /water/... always shows Water links
+  // even if the person's last remembered section was SkillMesh.
+  const inWaterSection = location.pathname.startsWith('/water');
+  const links = inWaterSection ? WATER_LINKS : SKILLMESH_LINKS;
+  const brandLabel = inWaterSection ? 'Water Delivery' : 'SkillMesh';
 
   return (
     <nav className="navbar">
       <div className="navbar-row">
-        {/* 1. Hamburger Menu Button (Now placed on the left) */}
         <button
           className="navbar-hamburger"
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -47,12 +58,12 @@ export default function Navbar() {
           )}
         </button>
 
-        {/* 2. Logo / Brand Name */}
-        <Link to="/dashboard" className="navbar-brand">
-          SkillMesh
+        {/* Logo now always returns to the chooser — not the section
+            dashboard — so switching sections is always one click away. */}
+        <Link to="/choose" className="navbar-brand">
+          {brandLabel}
         </Link>
 
-        {/* 3. Desktop Navigation Links */}
         <div className="navbar-links navbar-links-desktop">
           {links.map((link) => (
             <Link key={link.to} to={link.to} className="nav-link">
@@ -61,7 +72,6 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* 4. User Profile & Controls */}
         <div className="navbar-user">
           <ThemeToggle />
           <Avatar user={user} size={30} onClick={() => setAvatarModalOpen(true)} />
@@ -72,7 +82,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {menuOpen && (
         <div className="navbar-links-mobile">
           {links.map((link) => (
