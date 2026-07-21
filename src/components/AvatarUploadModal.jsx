@@ -14,11 +14,9 @@ export default function AvatarUploadModal({ onClose }) {
     const selected = e.target.files[0];
     if (!selected) return;
 
-    // Client-side size check before even attempting upload — catches an
-    // oversized file instantly instead of making someone wait for a
-    // network round-trip just to find out it was too big.
-    if (selected.size > 800 * 1024) {
-      setError('Image must be under 800KB. Try a smaller photo or compress it first.');
+    // Updated to 10MB to match backend limits
+    if (selected.size > 10 * 1024 * 1024) {
+      setError('Image must be under 10MB. Try a smaller photo or compress it first.');
       return;
     }
 
@@ -81,7 +79,7 @@ export default function AvatarUploadModal({ onClose }) {
           onChange={handleFileSelect}
           className="avatar-upload-input"
         />
-        <p className="hint">JPG, PNG, or WEBP. Under 800KB.</p>
+        <p className="hint">JPG, PNG, or WEBP. Under 10MB.</p>
 
         <div className="modal-actions">
           {user?.avatar_path && !preview && (
