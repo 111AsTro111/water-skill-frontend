@@ -8,6 +8,11 @@ import Register from './pages/Register';
 import ChooseSection, { SECTION_STORAGE_KEY } from './pages/ChooseSection';
 import Dashboard from './pages/Dashboard';
 import WaterDashboard from './pages/WaterDashboard';
+import BecomeSupplier from './pages/BecomeSupplier';
+import MyTankers from './pages/MyTankers';
+import PendingRequests from './pages/PendingRequests';
+import MyAssignedOrders from './pages/MyAssignedOrders';
+import BrowseSuppliers from './pages/BrowseSuppliers';
 import Skills from './pages/Skills';
 import Matches from './pages/Matches';
 import SkillDetail from './pages/SkillDetail';
@@ -56,6 +61,11 @@ export default function App() {
               <Route path="/water/dashboard" element={<Protected><WaterDashboard /></Protected>} />
               <Route path="/water/order-water" element={<Protected><PlaceOrder /></Protected>} />
               <Route path="/water/my-orders" element={<Protected><MyOrders /></Protected>} />
+              <Route path="/water/become-supplier" element={<Protected><BecomeSupplier /></Protected>} />
+              <Route path="/water/my-tankers" element={<Protected><MyTankers /></Protected>} />
+              <Route path="/water/pending-requests" element={<Protected><PendingRequests /></Protected>} />
+              <Route path="/water/assigned-orders" element={<Protected><MyAssignedOrders /></Protected>} />
+              <Route path="/water/browse-suppliers" element={<Protected><BrowseSuppliers /></Protected>} />
 
               <Route path="/" element={<SectionGate />} />
 

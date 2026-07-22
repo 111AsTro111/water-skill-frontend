@@ -16,8 +16,15 @@ const SKILLMESH_LINKS = [
 const WATER_LINKS = [
   { to: '/water/dashboard', label: 'Dashboard' },
   { to: '/water/order-water', label: 'Order Water' },
+  { to: '/water/browse-suppliers', label: 'Browse Suppliers' },
   { to: '/water/my-orders', label: 'My Orders' },
 ];
+
+// The "Switch section" control only makes sense as a top-level action —
+// showing it on every sub-page turned it into visual noise and made people
+// think it was the way back from ANY page, when sub-pages should use
+// BackButton (browser history) instead.
+const MAIN_DASHBOARD_PATHS = ['/skillmesh/dashboard', '/water/dashboard'];
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -34,6 +41,7 @@ export default function Navbar() {
   const inWaterSection = location.pathname.startsWith('/water');
   const links = inWaterSection ? WATER_LINKS : SKILLMESH_LINKS;
   const brandLabel = inWaterSection ? 'Water Delivery' : 'SkillMesh';
+  const showSwitch = MAIN_DASHBOARD_PATHS.includes(location.pathname);
 
   return (
     <nav className="navbar">
@@ -55,15 +63,15 @@ export default function Navbar() {
           )}
         </button>
 
-        <Link to="/choose" className="navbar-brand">
+        <Link to={inWaterSection ? '/water/dashboard' : '/skillmesh/dashboard'} className="navbar-brand">
           {brandLabel}
         </Link>
 
-        {/* Explicit, unmissable button back to the section chooser —
-            not relying on someone realizing the logo itself is clickable. */}
-        <Link to="/choose" className="btn btn-sm navbar-switch-section">
-          &larr; Switch
-        </Link>
+        {showSwitch && (
+          <Link to="/choose" className="btn btn-sm navbar-switch-section">
+            &larr; Switch
+          </Link>
+        )}
 
         <div className="navbar-links navbar-links-desktop">
           {links.map((link) => (
@@ -85,9 +93,11 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="navbar-links-mobile">
-          <Link to="/choose" className="nav-link" onClick={() => setMenuOpen(false)}>
-            &larr; Switch section
-          </Link>
+          {showSwitch && (
+            <Link to="/choose" className="nav-link" onClick={() => setMenuOpen(false)}>
+              &larr; Switch section
+            </Link>
+          )}
           {links.map((link) => (
             <Link key={link.to} to={link.to} className="nav-link" onClick={() => setMenuOpen(false)}>
               {link.label}
