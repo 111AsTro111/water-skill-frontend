@@ -22,6 +22,8 @@ import PlaceOrder from './pages/PlaceOrder';
 import MyOrders from './pages/MyOrders';
 import NotFound from './pages/NotFound';
 import './App.css';
+import BrowseSuppliers from './pages/BrowseSuppliers';
+import EditSupplierProfile from './pages/EditSupplierProfile';
 
 function Protected({ children }) {
   return <ProtectedRoute>{children}</ProtectedRoute>;
@@ -66,6 +68,8 @@ export default function App() {
               <Route path="/water/pending-requests" element={<Protected><PendingRequests /></Protected>} />
               <Route path="/water/assigned-orders" element={<Protected><MyAssignedOrders /></Protected>} />
               <Route path="/water/browse-suppliers" element={<Protected><BrowseSuppliers /></Protected>} />
+              <Route path="/water/browse-suppliers" element={<Protected><BrowseSuppliers /></Protected>} />
+              <Route path="/water/edit-supplier-profile" element={<Protected><EditSupplierProfile /></Protected>} />
 
               <Route path="/" element={<SectionGate />} />
 

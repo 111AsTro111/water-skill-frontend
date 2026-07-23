@@ -111,6 +111,10 @@ export default function WaterDashboard() {
                 <h3>My Tankers</h3>
                 <p>Manage your fleet's availability.</p>
               </Link>
+              <Link to="/water/edit-supplier-profile" className="dashboard-card">
+                <h3>Edit Supplier Profile</h3>
+                <p>Update your district, rate, and contact details.</p>
+              </Link>
             </>
           )}
         </div>
