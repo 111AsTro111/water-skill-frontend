@@ -11,6 +11,7 @@ export default function WaterDashboard() {
   // object = supplier profile (may or may not be verified yet)
   const [supplier, setSupplier] = useState(null);
   const [checked, setChecked] = useState(false);
+  const [pendingCount, setPendingCount] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -33,6 +34,32 @@ export default function WaterDashboard() {
       cancelled = true;
     };
   }, []);
+
+  // Only fetch the pending count once we know this is a verified supplier
+  // — no point checking for a buyer-only account. Also refreshes every 15s
+  // so the number stays roughly current even if they just sit on this
+  // page instead of clicking into Pending Requests directly.
+  useEffect(() => {
+    if (!supplier || !supplier.is_verified) return;
+    let cancelled = false;
+
+    function fetchCount() {
+      apiClient
+        .get('/order-supplier-requests/pending')
+        .then((res) => {
+          if (!cancelled) setPendingCount(res.data.requests.length);
+        })
+        .catch(() => {});
+    }
+
+    fetchCount();
+    const interval = setInterval(fetchCount, 15000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [supplier]);
 
   return (
     <div className="page">
@@ -70,7 +97,10 @@ export default function WaterDashboard() {
           {checked && supplier && supplier.is_verified && (
             <>
               <Link to="/water/pending-requests" className="dashboard-card">
-                <h3>Pending Requests</h3>
+                <h3>
+                  Pending Requests
+                  {pendingCount > 0 && <span className="badge-count"> ({pendingCount})</span>}
+                </h3>
                 <p>Orders waiting for you to accept or decline.</p>
               </Link>
               <Link to="/water/assigned-orders" className="dashboard-card">
