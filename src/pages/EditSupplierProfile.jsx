@@ -10,6 +10,28 @@ const DISTRICTS = [
   'Wokha', 'Zunheboto',
 ];
 
+// Inline styles for guaranteed visibility
+const bannerStyles = {
+  success: {
+    backgroundColor: '#d4edda',
+    color: '#155724',
+    padding: '12px 16px',
+    borderRadius: '6px',
+    borderLeft: '4px solid #28a745',
+    marginBottom: '16px',
+    fontWeight: '500',
+  },
+  error: {
+    backgroundColor: '#f8d7da',
+    color: '#721c24',
+    padding: '12px 16px',
+    borderRadius: '6px',
+    borderLeft: '4px solid #dc3545',
+    marginBottom: '16px',
+    fontWeight: '500',
+  },
+};
+
 export default function EditSupplierProfile() {
   const [form, setForm] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,7 +68,9 @@ export default function EditSupplierProfile() {
 
     try {
       await apiClient.put('/water-suppliers/me', form);
-      setSuccess('Profile updated.');
+      setSuccess('✅ Profile updated successfully!');
+      // Optional: alert fallback – remove if you don't want popups
+      // alert('Profile updated successfully!');
     } catch (err) {
       const message =
         err.response?.data?.error ||
@@ -74,8 +98,8 @@ export default function EditSupplierProfile() {
           <p>{error || 'Could not load your profile.'}</p>
         ) : (
           <form onSubmit={handleSubmit} className="auth-form" style={{ maxWidth: 420 }}>
-            {error && <div className="error-banner">{error}</div>}
-            {success && <div className="info-banner">{success}</div>}
+            {error && <div style={bannerStyles.error}>{error}</div>}
+            {success && <div style={bannerStyles.success}>{success}</div>}
 
             <label htmlFor="business_name">Business name</label>
             <input
