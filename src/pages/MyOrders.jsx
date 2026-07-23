@@ -60,7 +60,7 @@ export default function MyOrders() {
       <div className="page-content">
         <div className="page-header-row">
           <h1>My Orders</h1>
-          <Link to="/order-water">
+          <Link to="/water/order-water">
             <button>+ New order</button>
           </Link>
         </div>
