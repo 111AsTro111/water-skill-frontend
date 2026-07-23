@@ -22,7 +22,6 @@ import PlaceOrder from './pages/PlaceOrder';
 import MyOrders from './pages/MyOrders';
 import NotFound from './pages/NotFound';
 import './App.css';
-import BrowseSuppliers from './pages/BrowseSuppliers';
 import EditSupplierProfile from './pages/EditSupplierProfile';
 
 function Protected({ children }) {
