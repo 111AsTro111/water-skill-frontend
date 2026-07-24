@@ -78,6 +78,21 @@ export default function WaterDashboard() {
             <p>Track deliveries and payment status.</p>
           </Link>
 
+          {/* While the supplier check is still in flight, show a visibly
+              "loading" placeholder instead of nothing — makes the wait
+              feel intentional rather than like the page loaded broken/
+              incomplete, especially noticeable right after Render's free
+              tier cold-starts. */}
+          {!checked && (
+            <div
+              className="dashboard-card dashboard-card-loading"
+              style={{ opacity: 0.6, border: '1px dashed #999' }}
+            >
+              <h3>Checking your account...</h3>
+              <p>This can take a moment if the server just woke up.</p>
+            </div>
+          )}
+
           {/* Only shown once we've actually checked — avoids a flash of
               the wrong card while the request is still in flight. */}
           {checked && supplier === false && (
