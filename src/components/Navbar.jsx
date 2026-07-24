@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
 import Avatar from './Avatar';
 import AvatarUploadModal from './AvatarUploadModal';
+import { DropletIcon, SwapIcon } from './Icons';
 
 const SKILLMESH_LINKS = [
   { to: '/skillmesh/dashboard', label: 'Dashboard' },
@@ -43,6 +44,14 @@ export default function Navbar() {
   const brandLabel = inWaterSection ? 'Water Delivery' : 'SkillMesh';
   const showSwitch = MAIN_DASHBOARD_PATHS.includes(location.pathname);
 
+  // Drives the section-specific accent color entirely from CSS — see
+  // [data-section='water'] overrides in App.css. Set on <html> rather than
+  // this component's own DOM node so it cascades to EVERYTHING on the
+  // page, not just inside the navbar.
+  useEffect(() => {
+    document.body.classList.toggle('section-water', inWaterSection);
+  }, [inWaterSection]);
+
   return (
     <nav className="navbar">
       <div className="navbar-row">
@@ -64,6 +73,7 @@ export default function Navbar() {
         </button>
 
         <Link to={inWaterSection ? '/water/dashboard' : '/skillmesh/dashboard'} className="navbar-brand">
+          {inWaterSection ? <DropletIcon size={20} /> : <SwapIcon size={20} />}
           {brandLabel}
         </Link>
 
