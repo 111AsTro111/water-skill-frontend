@@ -37,6 +37,11 @@
   /* Ambient background mesh strength — separate light/dark tuning */
   --mesh-opacity: 8%;
   --mesh-opacity-amber: 6%;
+
+  /* How much of --bg-page tints over the SkillMesh logo image —
+     higher = fainter logo. Same variable drives both light and dark
+     since it references --bg-page, which already flips per theme. */
+  --logo-fade: 90%;
 }
 
 /* ---------- SkillMesh section — explicit now, for symmetry with
@@ -44,6 +49,24 @@
 body.section-skillmesh {
   --color-primary: #4c4fe0;
   --color-primary-soft: #ecedfd;
+
+  /* Faded LifeSkills/SkillMesh logo behind the mesh gradient. The
+     linear-gradient pair blends var(--bg-page) over the image at
+     --logo-fade strength, so it fades correctly in both light and
+     dark mode automatically (bg-page flips value in dark mode). */
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--bg-page) var(--logo-fade), transparent),
+      color-mix(in srgb, var(--bg-page) var(--logo-fade), transparent)
+    ),
+    url('/lifeskills-bg.webp'),
+    radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--color-primary) var(--mesh-opacity), transparent) 0%, transparent 32%),
+    radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--amber) var(--mesh-opacity-amber), transparent) 0%, transparent 28%),
+    radial-gradient(circle at 50% 92%, color-mix(in srgb, var(--color-primary) var(--mesh-opacity), transparent) 0%, transparent 35%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, 15% 8%, 88% 22%, 50% 92%;
+  background-size: 100% 100%, 480px auto, 100% 100%, 100% 100%, 100% 100%;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
 }
 
 /* ---------- Water Delivery section — swaps the "active" accent ---------- */
@@ -69,6 +92,7 @@ body[data-bs-theme='dark'] {
   --amber-soft: #2e260f !important;
   --mesh-opacity: 14%;
   --mesh-opacity-amber: 10%;
+  --logo-fade: 88%;
 
   background-color: var(--bg-page) !important;
   color: var(--color-text) !important;
@@ -108,9 +132,10 @@ body {
   -webkit-font-smoothing: antialiased;
 
   /* Ambient mesh gradient — retints automatically per section via
-     --color-primary (indigo on .section-skillmesh, teal on
-     .section-water, indigo default anywhere unclassed like auth
-     pages/chooser). Fixed so it stays put while content scrolls. */
+     --color-primary (teal on .section-water, indigo default anywhere
+     unclassed like auth pages/chooser). SkillMesh pages override this
+     whole property above with the logo layered in. Fixed so it stays
+     put while content scrolls. */
   background-image:
     radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--color-primary) var(--mesh-opacity), transparent) 0%, transparent 32%),
     radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--amber) var(--mesh-opacity-amber), transparent) 0%, transparent 28%),
