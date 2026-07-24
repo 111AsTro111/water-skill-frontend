@@ -39,6 +39,13 @@
   --mesh-opacity-amber: 6%;
 }
 
+/* ---------- SkillMesh section — explicit now, for symmetry with
+   .section-water (previously this was just the unclassed default) ---------- */
+body.section-skillmesh {
+  --color-primary: #4c4fe0;
+  --color-primary-soft: #ecedfd;
+}
+
 /* ---------- Water Delivery section — swaps the "active" accent ---------- */
 body.section-water {
   --color-primary: var(--water-accent);
@@ -101,8 +108,9 @@ body {
   -webkit-font-smoothing: antialiased;
 
   /* Ambient mesh gradient — retints automatically per section via
-     --color-primary (indigo default, teal on body.section-water).
-     Fixed so it stays put while page content scrolls over it. */
+     --color-primary (indigo on .section-skillmesh, teal on
+     .section-water, indigo default anywhere unclassed like auth
+     pages/chooser). Fixed so it stays put while content scrolls. */
   background-image:
     radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--color-primary) var(--mesh-opacity), transparent) 0%, transparent 32%),
     radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--amber) var(--mesh-opacity-amber), transparent) 0%, transparent 28%),
