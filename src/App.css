@@ -33,6 +33,10 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --shadow-card: 0 1px 3px rgba(28, 31, 38, 0.08);
+
+  /* Ambient background mesh strength — separate light/dark tuning */
+  --mesh-opacity: 8%;
+  --mesh-opacity-amber: 6%;
 }
 
 /* ---------- Water Delivery section — swaps the "active" accent ---------- */
@@ -56,6 +60,8 @@ body[data-bs-theme='dark'] {
   --color-primary-soft: #22254a !important;
   --water-accent-soft: #12292b !important;
   --amber-soft: #2e260f !important;
+  --mesh-opacity: 14%;
+  --mesh-opacity-amber: 10%;
 
   background-color: var(--bg-page) !important;
   color: var(--color-text) !important;
@@ -93,6 +99,17 @@ body {
   color: var(--color-text);
   transition: background-color 0.25s ease, color 0.25s ease;
   -webkit-font-smoothing: antialiased;
+
+  /* Ambient mesh gradient — retints automatically per section via
+     --color-primary (indigo default, teal on body.section-water).
+     Fixed so it stays put while page content scrolls over it. */
+  background-image:
+    radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--color-primary) var(--mesh-opacity), transparent) 0%, transparent 32%),
+    radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--amber) var(--mesh-opacity-amber), transparent) 0%, transparent 28%),
+    radial-gradient(circle at 50% 92%, color-mix(in srgb, var(--color-primary) var(--mesh-opacity), transparent) 0%, transparent 35%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 
 h1, h2, h3, h4 {
@@ -266,7 +283,7 @@ select:focus-visible {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: var(--bg-page);
+  background: transparent;
 }
 
 .auth-form {
