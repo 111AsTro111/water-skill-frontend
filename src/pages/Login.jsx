@@ -41,7 +41,7 @@ export default function Login() {
   return (
     <div className="auth-page">
       <form onSubmit={handleSubmit} className="auth-form">
-        <h1>Log in to SkillMesh</h1>
+        <h1>Log in to SkillMesh &amp; Water Delivery</h1>
 
         {error && <div className="error-banner">{error}</div>}
 
