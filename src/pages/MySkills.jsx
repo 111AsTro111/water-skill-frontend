@@ -28,8 +28,6 @@ export default function MySkills() {
   async function handleRemove(skillId) {
     try {
       await skillsApi.remove(skillId);
-      // Update local state instead of re-fetching everything — feels
-      // instant to the user instead of waiting on a second network call.
       setSkills((prev) => prev.filter((s) => s.id !== skillId));
     } catch (err) {
       setError('Could not remove that skill. Try again.');
@@ -45,7 +43,8 @@ export default function MySkills() {
       <div className="page-content">
         <div className="page-header-row">
           <h1>My Skills</h1>
-          <Link to="/skills">
+          {/* ✅ Fixed: /skills → /skillmesh/skills */}
+          <Link to="/skillmesh/skills">
             <button>+ Add a skill</button>
           </Link>
         </div>

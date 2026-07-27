@@ -43,7 +43,8 @@ export default function SkillDetail() {
     <div className="page">
       <Navbar />
       <div className="page-content">
-        <Link to="/skills">&larr; Back to all skills</Link>
+        {/* ✅ Fixed: /skills → /skillmesh/skills */}
+        <Link to="/skillmesh/skills">&larr; Back to all skills</Link>
 
         {loading && <p>Loading...</p>}
         {error && <div className="error-banner">{error}</div>}
