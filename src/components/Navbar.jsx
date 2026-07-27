@@ -41,7 +41,7 @@ export default function Navbar() {
 
   const inWaterSection = location.pathname.startsWith('/water');
   const links = inWaterSection ? WATER_LINKS : SKILLMESH_LINKS;
-  const brandLabel = inWaterSection ? 'Water Delivery' : 'SkillMesh';
+  const brandLabel = 'SkillMesh &amp; Water Delivery';
   const showSwitch = MAIN_DASHBOARD_PATHS.includes(location.pathname);
 
   // Drives the section-specific accent color entirely from CSS — see

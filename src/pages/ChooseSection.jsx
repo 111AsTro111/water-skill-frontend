@@ -31,7 +31,7 @@ export default function ChooseSection() {
     <div className="page">
       <nav className="navbar">
         <div className="navbar-row">
-          <span className="navbar-brand">SkillMesh</span>
+          <span className="navbar-brand">SkillMesh &amp; Water Delivery</span>
           <div className="navbar-user">
             <ThemeToggle />
             <Avatar user={user} size={30} />
