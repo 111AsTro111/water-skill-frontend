@@ -23,6 +23,8 @@ import MyOrders from './pages/MyOrders';
 import NotFound from './pages/NotFound';
 import './App.css';
 import EditSupplierProfile from './pages/EditSupplierProfile';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function Protected({ children }) {
   return <ProtectedRoute>{children}</ProtectedRoute>;
@@ -70,6 +72,8 @@ export default function App() {
               <Route path="/water/browse-suppliers" element={<Protected><BrowseSuppliers /></Protected>} />
               <Route path="/water/edit-supplier-profile" element={<Protected><EditSupplierProfile /></Protected>} />
 
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/" element={<SectionGate />} />
 
               <Route path="*" element={<NotFound />} />

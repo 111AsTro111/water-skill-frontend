@@ -1406,4 +1406,18 @@ button.small {
     transition: none !important;
     animation: none !important;
   }
+  .auth-forgot {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.auth-forgot a {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.auth-forgot a:hover {
+  text-decoration: underline;
+}
 }
