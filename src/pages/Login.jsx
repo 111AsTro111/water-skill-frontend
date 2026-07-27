@@ -19,10 +19,6 @@ export default function Login() {
     try {
       await login(email, password);
 
-      // /dashboard no longer exists as a route now that the app is split
-      // into SkillMesh / Water sections. Send returning users straight to
-      // their last section; first-time or cleared-storage users land on
-      // the chooser instead.
       const remembered = localStorage.getItem(SECTION_STORAGE_KEY);
       if (remembered === 'skillmesh') {
         navigate('/skillmesh/dashboard');
@@ -72,6 +68,11 @@ export default function Login() {
         <button type="submit" disabled={submitting}>
           {submitting ? 'Logging in...' : 'Log in'}
         </button>
+
+        {/* ✅ Forgot Password link */}
+        <p className="auth-forgot">
+          <Link to="/forgot-password">Forgot password?</Link>
+        </p>
 
         <p className="auth-switch">
           Don't have an account? <Link to="/register">Register</Link>
